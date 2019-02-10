@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="key1"
+            app:iconSpaceReserved="false"
+            android:summary="Switch Summary"
+            android:title="Switch Preference" />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:dialogMessage="Dialog Message"
+            android:key="key2"
+            app:iconSpaceReserved="false"
+            android:summary="EditText Summary"
+            android:title="EditText Preference" />
+
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key3"
+            android:summary="CheckBox Summary"
+            app:iconSpaceReserved="false"
+            android:title="CheckBox Preference" />
+
+</PreferenceScreen>

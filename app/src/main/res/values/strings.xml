@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Retrofit</string>
+    <string name="title_activity_books">Books</string>
 </resources>

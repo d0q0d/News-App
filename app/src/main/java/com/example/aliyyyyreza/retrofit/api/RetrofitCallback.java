@@ -2,6 +2,8 @@ package com.example.aliyyyyreza.retrofit.api;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,4 +27,6 @@ public class RetrofitCallback<T> implements Callback<T> {
     public void onFailure(Call<T> call, Throwable t) {
         mCallback.onFailure(call, t);
     }
+
+
 }

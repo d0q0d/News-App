@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "80614751138",
+    "firebase_url": "https://meretrofit.firebaseio.com",
+    "project_id": "meretrofit",
+    "storage_bucket": "meretrofit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80614751138:android:572176b7551a48ba",
+        "android_client_info": {
+          "package_name": "com.example.aliyyyyreza.retrofit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80614751138-p3arcidta3m4co6lf0g0nj8fmkhfi03l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aliyyyyreza.retrofit",
+            "certificate_hash": "a2aaed9a7386ffb7d89ce3372f02053dca28d1d7"
+          }
+        },
+        {
+          "client_id": "80614751138-oimo7fsb5ehc1unfhrhbashmpnvabsfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR58q1Vtx4cHKW3UMDk9pAuL3RhwNkgyQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80614751138-oimo7fsb5ehc1unfhrhbashmpnvabsfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

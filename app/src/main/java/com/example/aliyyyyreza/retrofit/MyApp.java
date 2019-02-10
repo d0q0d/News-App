@@ -1,6 +1,7 @@
 package com.example.aliyyyyreza.retrofit;
 
 import android.app.Application;
+import androidx.room.Room;
 
 import com.example.aliyyyyreza.retrofit.api.ApiClient;
 import com.example.aliyyyyreza.retrofit.api.ApiService;

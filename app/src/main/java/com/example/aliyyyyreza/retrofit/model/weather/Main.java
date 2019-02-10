@@ -1,4 +1,4 @@
-package com.example.aliyyyyreza.retrofit.Model.Weather;
+package com.example.aliyyyyreza.retrofit.model.weather;
 
 public class Main {
     private String humidity;

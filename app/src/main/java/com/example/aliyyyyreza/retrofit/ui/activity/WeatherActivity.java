@@ -1,19 +1,29 @@
-package com.example.aliyyyyreza.retrofit;
+package com.example.aliyyyyreza.retrofit.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.example.aliyyyyreza.retrofit.Model.User.Status;
-import com.example.aliyyyyreza.retrofit.Model.Weather.Model;
-import com.example.aliyyyyreza.retrofit.Model.User.SignUp;
-import com.example.aliyyyyreza.weather7.R;
+import com.example.aliyyyyreza.retrofit.model.user.SignUp;
+import com.example.aliyyyyreza.retrofit.model.user.Status;
+import com.example.aliyyyyreza.retrofit.model.weather.Model;
+import com.example.aliyyyyreza.retrofit.MyApp;
+import com.example.aliyyyyreza.retrofit.R;
 import com.example.aliyyyyreza.retrofit.api.RetrofitCallback;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -28,13 +38,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     Toolbar toolbar;
     EditText firstName, lastName;
     Button signUp;
+    Button books;
+    TextView spanTextView;
+
     RetrofitCallback<Model> modelRetrofitCallback = new RetrofitCallback<>(this, new Callback<Model>() {
         @Override
         public void onResponse(Call<Model> call, Response<Model> response) {
-            //Log.i(TAG, "onResponse:"+response.body());
+            Log.i(TAG, "onResponse: " + new Gson().toJson(response.body()));
             Model model = response.body();
             int x = (int) (Double.parseDouble(model.getMain().getTemp()) - 273);
-            Snackbar.make(findViewById(R.id.cl1), "London : "+x + "C", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.cl1), "London : " + x + "C", Snackbar.LENGTH_LONG).show();
         }
 
         @Override
@@ -45,7 +58,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     RetrofitCallback<Status> boolianRetrofitCallback = new RetrofitCallback<>(this, new Callback<Status>() {
         @Override
         public void onResponse(Call<Status> call, Response<Status> response) {
-            //Log.i(TAG, "onResponse: " + response.body());
+            Log.i(TAG, "onResponse: " + new Gson().toJson(response.body()));
             Status boolian = response.body();
             Snackbar.make(findViewById(R.id.cl1), boolian.isSuccess() + " ", Snackbar.LENGTH_LONG).show();
         }
@@ -55,14 +68,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             Log.i("TAG", "onFailure=" + t.getLocalizedMessage());
         }
     });
-    //private CheckNetwork checkNetwork;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-      /*  checkNetwork = new CheckNetwork();
-        registerReceiver(checkNetwork, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));*/
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +76,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         setupViews();
         MyApp.getApplication().setUpRetrofit();
         getWeatherInfo();
+        setSpan(getResources().getString(R.string.app_name));
     }
 
-    @Override
-    protected void onStop() {
-        //unregisterReceiver(checkNetwork);
-        super.onStop();
+    private void setSpan(String span) {
+        Spannable spannable=new SpannableString(span);
+        spannable.setSpan(new ForegroundColorSpan(Color.BLUE),0,5,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new StyleSpan(Typeface.BOLD),0,5,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanTextView.setText(spannable);
     }
 
 
@@ -84,12 +91,13 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
-      /*  getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        spanTextView=findViewById(R.id.spanTextView);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         signUp = findViewById(R.id.signUp);
+        books = findViewById(R.id.books);
         signUp.setOnClickListener(this);
+        books.setOnClickListener(this);
     }
 
 
@@ -112,25 +120,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 firstName.getText().clear();
                 lastName.getText().clear();
                 break;
+            case R.id.books:
+                startActivity(new Intent(WeatherActivity.this,ArticleActivity.class));
+                break;
         }
     }
 
     private void getWeatherInfo() {
         MyApp.myApi.getWeatherInfo().enqueue(modelRetrofitCallback);
     }
-
-   /* private class CheckNetwork extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            boolean isConnected = networkInfo != null && networkInfo.isConnectedOrConnecting();
-            if (isConnected) {
-            } else {
-
-            }
-        }
-    }*/
 }
 

@@ -1,4 +1,4 @@
-package com.example.aliyyyyreza.retrofit.Model.User;
+package com.example.aliyyyyreza.retrofit.model.user;
 
 public class SignUp {
     String firstName;
